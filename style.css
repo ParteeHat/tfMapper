@@ -1,0 +1,16 @@
+HTML,
+body {
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+}
+.scrollable-menu {
+  height: auto;
+  max-height: 200px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+/*
+  https://coolors.co/palette/363b4e-4f3b78-927fbf-c4bbf0-ffffff
+  https://coolors.co/palette/272532-22254b-373b69-7378c5-6099b9
+*/
