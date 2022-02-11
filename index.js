@@ -3,7 +3,7 @@ import './style.css';
 
 var canvas = new fabric.Canvas('canvas');
 var map = new Image();
-map.src = 'https://demos.tf/e0c37be98aac2a47e4c4.webp';
+map.src = 'process.png';
 console.log(map.width);
 console.log(map.height);
 //canvas.backgroundColor = 'rgba(0,0,255,0.3)';
