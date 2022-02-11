@@ -1,3 +1,3 @@
-# js-qfnrdb
+# tfMapper
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/js-qfnrdb)
+https://stackblitz.com/edit/js-qfnrdb
