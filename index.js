@@ -65,23 +65,37 @@ var rect = new fabric.Rect({
   fill: 'red',
   width: 20,
   height: 20,
+  hasControls: false,
 });
 canvas.add(rect);
-
+var itemCount = 1
 function spawn(cl) {
-  fabric.Image.fromURL('https://parteehat.github.io/LoadN/droo-lt46hn.jpg', function(oImg) {
+  fabric.Image.fromURL('https://parteehat.github.io/LoadN/droo-lt46hn.jpg', function (oImg) {
     canvas.add(oImg);
+    canvas.setActiveObject(canvas.item(itemCount));
+    oImg.set('left', '')
+    itemCount++
   });
 }
 
-document.getElementById("pscout").addEventListener("click", function() {spawn("pscout") });
-document.getElementById("fscout").addEventListener("click", function() {spawn("fscout") });
-document.getElementById("psoldier").addEventListener("click", function() {spawn("psoldier") });
-document.getElementById("rsoldier").addEventListener("click", function() {spawn("rsoldier") });
-document.getElementById("pyro").addEventListener("click", function() {spawn("pyro") });
-document.getElementById("demo").addEventListener("click", function() {spawn("demo") });
-document.getElementById("heavy").addEventListener("click", function() {spawn("heavy") });
-document.getElementById("engineer").addEventListener("click", function() {spawn("engineer") });
-document.getElementById("medic").addEventListener("click", function() {spawn("medic") });
-document.getElementById("sniper").addEventListener("click", function() {spawn("sniper") });
-document.getElementById("spy").addEventListener("click", function() {spawn("spy") });
+canvas.on('mouse:down', function(options){
+   getMouse(options);// its not an event its options of your canvas object
+});
+
+
+function getMouse(options) {
+    console.log(options.absolutePointer.x);// you can check all options here
+    // console.log(options.e.clientX);
+}
+
+document.getElementById("pscout").addEventListener("click", function () { spawn("pscout") });
+document.getElementById("fscout").addEventListener("click", function () { spawn("fscout") });
+document.getElementById("psoldier").addEventListener("click", function () { spawn("psoldier") });
+document.getElementById("rsoldier").addEventListener("click", function () { spawn("rsoldier") });
+document.getElementById("pyro").addEventListener("click", function () { spawn("pyro") });
+document.getElementById("demo").addEventListener("click", function () { spawn("demo") });
+document.getElementById("heavy").addEventListener("click", function () { spawn("heavy") });
+document.getElementById("engineer").addEventListener("click", function () { spawn("engineer") });
+document.getElementById("medic").addEventListener("click", function () { spawn("medic") });
+document.getElementById("sniper").addEventListener("click", function () { spawn("sniper") });
+document.getElementById("spy").addEventListener("click", function () { spawn("spy") });
