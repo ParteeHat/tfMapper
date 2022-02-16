@@ -1,25 +1,10 @@
 let canvas = new fabric.Canvas("canvas", { backgroundImage: 'process.png' });
-var map = new Image();
-map.src = 'process.png';
-console.log(map.width);
-console.log(map.height);
 var objectSelected = false
 canvas.selection = false;
-//canvas.backgroundColor = 'rgba(0,0,255,0.3)';
+canvas.backgroundColor = 'rgba(0,0,0,1)';
 
-// create a rectangle object
-var rect = new fabric.Rect({
-  left: 100,
-  top: 100,
-  fill: 'red',
-  width: 20,
-  height: 20,
-});
+// resize canvas upon window resize
 resize();
-// "add" rectangle onto canvas
-
-canvas.add(rect);
-
 function resize() {
   canvas.setWidth(window.innerWidth);
   canvas.setHeight(window.innerHeight);
@@ -27,6 +12,7 @@ function resize() {
 }
 window.addEventListener('resize', resize, false);
 
+// zoom
 canvas.on('mouse:wheel', function (opt) {
   var delta = opt.e.deltaY;
   var zoom = canvas.getZoom();
@@ -36,29 +22,9 @@ canvas.on('mouse:wheel', function (opt) {
   canvas.zoomToPoint({ x: opt.e.offsetX, y: opt.e.offsetY }, zoom);
   opt.e.preventDefault();
   opt.e.stopPropagation();
-  // var vpt = this.viewportTransform;
-  // if (zoom < 1 / 1000) {
-  //   vpt[4] = 200 - (1000 * zoom) / 2;
-  //   vpt[5] = 200 - (1000 * zoom) / 2;
-  // } else {
-  //   if (vpt[4] >= 0) {
-  //     vpt[4] = 0;
-  //   } else if (vpt[4] < canvas.getWidth() - 1000 * zoom) {
-  //     vpt[4] = canvas.getWidth() - 1000 * zoom;
-  //   }
-  //   if (vpt[5] >= 0) {
-  //     vpt[5] = 0;
-  //   } else if (vpt[5] < canvas.getHeight() - 1000 * zoom) {
-  //     vpt[5] = canvas.getHeight() - 1000 * zoom;
-  //   }
-  // }
 });
-canvas.on('selection:created', function () {
-  objectSelected = true;
-});
-canvas.on('selection:cleared', function () {
-  objectSelected = false;
-});
+
+// pan
 canvas.on('mouse:down', function (opt) {
   var evt = opt.e;
   if (objectSelected === false) {
@@ -84,3 +50,38 @@ canvas.on('mouse:up', function (opt) {
   this.setViewportTransform(this.viewportTransform);
   this.isDragging = false;
 });
+// prevent panning while object is selected
+canvas.on('selection:created', function () {
+  objectSelected = true;
+});
+canvas.on('selection:cleared', function () {
+  objectSelected = false;
+});
+
+// create a rectangle object
+var rect = new fabric.Rect({
+  left: 100,
+  top: 100,
+  fill: 'red',
+  width: 20,
+  height: 20,
+});
+canvas.add(rect);
+
+function spawn(cl) {
+  fabric.Image.fromURL('https://parteehat.github.io/LoadN/droo-lt46hn.jpg', function(oImg) {
+    canvas.add(oImg);
+  });
+}
+
+document.getElementById("pscout").addEventListener("click", function() {spawn("pscout") });
+document.getElementById("fscout").addEventListener("click", function() {spawn("fscout") });
+document.getElementById("psoldier").addEventListener("click", function() {spawn("psoldier") });
+document.getElementById("rsoldier").addEventListener("click", function() {spawn("rsoldier") });
+document.getElementById("pyro").addEventListener("click", function() {spawn("pyro") });
+document.getElementById("demo").addEventListener("click", function() {spawn("demo") });
+document.getElementById("heavy").addEventListener("click", function() {spawn("heavy") });
+document.getElementById("engineer").addEventListener("click", function() {spawn("engineer") });
+document.getElementById("medic").addEventListener("click", function() {spawn("medic") });
+document.getElementById("sniper").addEventListener("click", function() {spawn("sniper") });
+document.getElementById("spy").addEventListener("click", function() {spawn("spy") });
