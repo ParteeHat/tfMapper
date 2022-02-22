@@ -1,7 +1,25 @@
-let canvas = new fabric.Canvas("canvas", { backgroundImage: 'process.png' });
 var objectSelected = false
+var itemCreated = false
+var itemCount = 1
+var movedObject
+var loading = true
+var map = new Image()
+map.src = "process.png"
+let canvas = new fabric.Canvas("canvas", { backgroundImage: map.src });
 canvas.selection = false;
 canvas.backgroundColor = 'rgba(0,0,0,1)';
+
+
+canvas.on('after:render', function (opt) {
+  if(loading) {
+    loading = false
+    var vpt = this.viewportTransform;
+    //CHange center point for each map
+    vpt[4] = -(map.width/2.87)
+    vpt[5] = -(map.height/2.87)
+    this.requestRenderAll();
+  }
+})
 
 // resize canvas upon window resize
 resize();
@@ -29,6 +47,7 @@ canvas.on('mouse:down', function (opt) {
   var evt = opt.e;
   if (objectSelected === false) {
     this.isDragging = true;
+
     this.lastPosX = evt.clientX;
     this.lastPosY = evt.clientY;
   }
@@ -68,25 +87,51 @@ var rect = new fabric.Rect({
   hasControls: false,
 });
 canvas.add(rect);
-var itemCount = 1
+
 function spawn(cl) {
   fabric.Image.fromURL('https://parteehat.github.io/LoadN/droo-lt46hn.jpg', function (oImg) {
+    canvas.setActiveObject(oImg);
     canvas.add(oImg);
-    canvas.setActiveObject(canvas.item(itemCount));
-    oImg.set('left', '')
+    oImg.id = itemCount
+    movedObject = oImg
+    movedObject.left = -9999999999;
+    movedObject.top = -9999999999;
+    itemCreated = true;
     itemCount++
   });
 }
-
-canvas.on('mouse:down', function(options){
-   getMouse(options);// its not an event its options of your canvas object
+canvas.on('mouse:move', function (opt) {
+  if (itemCreated) {
+    canvas.discardActiveObject();
+    movedObject.set('opacity', 0.5)
+    movedObject.left = (opt.absolutePointer.x - movedObject.width / 2);
+    movedObject.top = (opt.absolutePointer.y - movedObject.height / 2);
+    movedObject.setCoords();
+    canvas.renderAll();
+  }
+});
+canvas.on('mouse:down', function (opt) {
+  if (itemCreated) {
+    // movedObject.set('selectable', true)
+    canvas.setActiveObject(movedObject);
+    movedObject.set('opacity', 1)
+    itemCreated = false;
+  }
 });
 
+// function drag() {
+//   var obt = canvas.item(itemCount)
+//   console.log(obt.get('left'))
+//   while (canvas.getActiveObject().get(itemCount).get('selected') == true) {
+//     canvas.getActiveObject().get(itemCount).set('left', String(getMouse(options)))
+//     console.log(getMouse(options));
+//   }
+// }
 
-function getMouse(options) {
-    console.log(options.absolutePointer.x);// you can check all options here
-    // console.log(options.e.clientX);
-}
+// function getMouse(options) {
+//   return (options.absolutePointer.x);
+//   // console.log(options.e.clientX);
+// }
 
 document.getElementById("pscout").addEventListener("click", function () { spawn("pscout") });
 document.getElementById("fscout").addEventListener("click", function () { spawn("fscout") });
