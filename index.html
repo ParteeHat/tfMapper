@@ -2,20 +2,52 @@
 <canvas id="canvas" z-index="0"></canvas>
 
 <div class="footer">
-  <button id="pscout" type="button"> <img src="https://parteehat.github.io/LoadN/droo-lt46hn.jpg" height ="40" width="40" draggable="true"/></button>
-  <button id="fscout" type="button"> <img src="https://parteehat.github.io/LoadN/droo-lt46hn.jpg" height ="40" width="40" draggable="true"/></button>
-  <button id="psoldier" type="button"> <img src="https://parteehat.github.io/LoadN/droo-lt46hn.jpg" height ="40" width="40" draggable="true"/></button>
-  <button id="rsoldier" type="button"> <img src="https://parteehat.github.io/LoadN/droo-lt46hn.jpg" height ="40" width="40" draggable="true"/></button>
-  <button id="pyro" type="button"> <img src="https://parteehat.github.io/LoadN/droo-lt46hn.jpg" height ="40" width="40" draggable="true"/></button>
-  <button id="demo" type="button"> <img src="https://parteehat.github.io/LoadN/droo-lt46hn.jpg" height ="40" width="40" draggable="true"/></button>
-  <button id="heavy" type="button"> <img src="https://parteehat.github.io/LoadN/droo-lt46hn.jpg" height ="40" width="40" draggable="true"/></button>
-  <button id="engineer" type="button"> <img src="https://parteehat.github.io/LoadN/droo-lt46hn.jpg" height ="40" width="40" draggable="true"/></button>
-  <button id="medic" type="button"> <img src="https://parteehat.github.io/LoadN/droo-lt46hn.jpg" height ="40" width="40" draggable="true"/></button>
-  <button id="sniper" type="button"> <img src="https://parteehat.github.io/LoadN/droo-lt46hn.jpg" height ="40" width="40" draggable="true"/></button>
-  <button id="spy" type="button"> <img src="https://parteehat.github.io/LoadN/droo-lt46hn.jpg" height ="40" width="40" draggable="true"/></button>
+  <input type="checkbox" id="switch" class="input" />
+  <button id="fscout" type="button"><img id="fscoutimg" src="icons/fscoutblu.png" height ="40" width="40"/></button>
+  <button id="pscout" type="button"><img id="pscoutimg" src="icons/pscoutblu.png" height ="40" width="40"/></button>
+  <button id="psoldier" type="button"><img id="psoldierimg" src="icons/psoldierblu.png" height ="40" width="40"/></button>
+  <button id="rsoldier" type="button"><img id="rsoldierimg" src="icons/rsoldierblu.png" height ="40" width="40"/></button>
+  <button id="pyro" type="button"><img id="pyroimg" src="icons/pyroblu.png" height ="40" width="40"/></button>
+  <button id="demoman" type="button"><img id="demomanimg" src="icons/demomanblu.png" height ="40" width="40"/></button>
+  <button id="heavy" type="button"><img id="heavyimg" src="icons/heavyblu.png" height ="40" width="40"/></button>
+  <button id="engineer" type="button"><img id="engineerimg" src="icons/engineerblu.png" height ="40" width="40"/></button>
+  <button id="medic" type="button"><img id="medicimg" src="icons/medicblu.png" height ="40" width="40"/></button>
+  <button id="sniper" type="button"><img id="sniperimg" src="icons/sniperblu.png" height ="40" width="40"/></button>
+  <button id="spy" type="button"><img id="spyimg" src="icons/spyblu.png" height ="40" width="40"/></button>
+  <button id="delete" type="button"><img src="icons/spyblu.png" height ="40" width="40"/></button>
+  <!-- Draw -->
+<li style="margin-top:10px;">
+  <button id="drawing-mode" class="btn btn-info">Enter drawing mode</button>
+  <div style="display: none;" id="drawing-mode-options">
+    </select><br>
+    <label for="drawing-line-width">Line width:</label>
+    <input type="range" value="10" min="0" max="150" id="drawing-line-width"><br>
+    <label for="drawing-color">Line color:</label>
+    <input type="color" value="#0a0fc9" id="drawing-color">
+  </div>
+</li>
 </div>
+
+
+
+<script>
+  var currentTeam = "blu"
+  let classes = ["fscout", "pscout", "psoldier", "rsoldier", "pyro", "demoman", "heavy", "engineer", "medic", "sniper", "spy"]
+  document.getElementById('switch').addEventListener('click', function() {
+    if (document.getElementById('switch').checked) {
+      currentTeam = "red"
+      for (let item of classes) {
+        document.getElementById(item + "img").src = "icons/" + item + currentTeam + ".png"
+      }
+    } else {
+      currentTeam = "blu"
+      for (let item of classes) {
+        document.getElementById(item + 'img').src = "icons/" + item + currentTeam + ".png"
+      }
+    }
+  });
+</script>
 <!-- https://parteehat.github.io/LoadN/droo-lt46hn.jpg -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
 <script src="index.js"></script>
 <link rel="stylesheet" type="text/css"href="style.css">
