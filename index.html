@@ -2,7 +2,13 @@
 <canvas id="canvas" z-index="0"></canvas>
 
 <div class="footer">
-  <input type="checkbox" id="switch" class="input" />
+  <div class="blockformat">
+    <div class="button r" id="button-1">
+      <input type="checkbox" id="switch" class="checkbox" />
+      <div class="knobs"></div>
+      <div class="layer"></div>
+    </div>
+  </div>
   <button id="fscout" type="button"><img id="fscoutimg" src="icons/fscoutblu.png" height ="40" width="40"/></button>
   <button id="pscout" type="button"><img id="pscoutimg" src="icons/pscoutblu.png" height ="40" width="40"/></button>
   <button id="psoldier" type="button"><img id="psoldierimg" src="icons/psoldierblu.png" height ="40" width="40"/></button>
@@ -14,18 +20,19 @@
   <button id="medic" type="button"><img id="medicimg" src="icons/medicblu.png" height ="40" width="40"/></button>
   <button id="sniper" type="button"><img id="sniperimg" src="icons/sniperblu.png" height ="40" width="40"/></button>
   <button id="spy" type="button"><img id="spyimg" src="icons/spyblu.png" height ="40" width="40"/></button>
-  <button id="delete" type="button"><img src="icons/spyblu.png" height ="40" width="40"/></button>
+  <button id="delete" type="button"><img src="icons/delete.png" height ="35" width="30" style="margin-bottom:2px;"/></button>
+  <button id="text" type="button"><img src="icons/t.png" height ="40" width="40"/></button>
   <!-- Draw -->
-<li style="margin-top:10px;">
-  <button id="drawing-mode" class="btn btn-info">Enter drawing mode</button>
-  <div style="display: none;" id="drawing-mode-options">
-    </select><br>
-    <label for="drawing-line-width">Line width:</label>
-    <input type="range" value="10" min="0" max="150" id="drawing-line-width"><br>
-    <label for="drawing-color">Line color:</label>
-    <input type="color" value="#0a0fc9" id="drawing-color">
-  </div>
-</li>
+  <li style="margin-top:10px;">
+    <button id="drawing-mode" class="btn btn-info">Enter drawing mode</button>
+    <div style="display: none;" id="drawing-mode-options">
+      </select><br>
+      <label for="drawing-line-width">Line width:</label>
+      <input type="range" value="10" min="0" max="150" id="drawing-line-width"><br>
+      <label for="drawing-color">Line color:</label>
+      <input type="color" value="#0a0fc9" id="drawing-color">
+    </div>
+  </li>
 </div>
 
 
